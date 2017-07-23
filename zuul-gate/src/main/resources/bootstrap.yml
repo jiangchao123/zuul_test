@@ -43,8 +43,7 @@ zuul:
       serviceId: service1
 #      url: http://localhost:7001/service1
 
-    service2:
-      stripPrefix: true
-      path: /service2/**
-      serviceId: service2
-#      url: http://localhost:7002/service2
+#    service2:
+#      stripPrefix: true
+#      path: /service2/**
+#      serviceId: service2
