@@ -1,0 +1,50 @@
+##consul 服务发现
+#spring.cloud.consul.host=192.168.11.29
+##,192.168.11.32,192.168.11.20
+#spring.cloud.consul.port=8500
+##本地环境需要配置hostname为ip否则consul默认hostname是机器名导致无法连接
+#spring.cloud.consul.discovery.hostname=192.168.100.207
+#
+##使用服务发现找到配置中心服务
+##spring.cloud.config.discovery.enabled=true
+##spring.cloud.config.discovery.serviceId=config-server
+##spring.cloud.config.failFast=true
+##health.config.enabled=false
+
+spring:
+  profiles:
+    active: localtest
+  cloud:
+      #consul配置，默认host->localhost,port->8500
+      consul:
+        host: localhost
+        port: 8500
+        config:
+          watch:
+            #禁止自动检测consul KV存储中的配置参数，并 refresh spring context，默认值为打开
+            enabled: false
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+
+# stripPrefix默认为TRUE，表示是否清楚前缀，TRUE的话则不去前缀，需要这样访问/service1/service1/hello;
+# false的话则表示不清楚，需要这样访问/service1/hello
+zuul:
+  routes:
+    service1:
+      stripPrefix: false
+      path: /service1/**
+      serviceId: service1
+#      url: http://localhost:7001/service1
+
+    service2:
+      stripPrefix: true
+      path: /service2/**
+      serviceId: service2
+#      url: http://localhost:7002/service2

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: service2
+server:
+  port: 7002
+#spring.label=master
+#spring.cloud.config.profile=dev

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: zuul
+server:
+  port: 8000
+#spring.label=master
+#spring.cloud.config.profile=dev
